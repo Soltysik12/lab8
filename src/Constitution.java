@@ -1,8 +1,6 @@
 import java.util.List;
 
-/**
- * Created by agnieszka on 03.12.16.
- */
+
 public class Constitution {
 
     protected List<Article> articles;
@@ -10,28 +8,28 @@ public class Constitution {
 
     public String getChapter(int n)
     {
-        StringBuilder sb = new StringBuilder("Rozdział " + n + "\n" + chapters.get(n).getTitle());
+        StringBuilder sb = new StringBuilder("Rozdział " + n + "\n");
 
-        for(int i = chapters.get(n).getStart() - 1 ; i < chapters.get(n).getEnd(); i ++)
+        for(int i = chapters.get(n-1).getStart(); i < chapters.get(n-1).getEnd(); i ++)
         {
             sb.append(articles.get(i).getTextArticle());
         }
         return sb.toString();
     }
 
-    public String getArticle(int a, int b)
+    public String getArticle(int a)
     {
-        int nrRozdzial = articles.get(a).getNrChapter();
+        return getArticles(a,a);
 
-        StringBuilder sb = new StringBuilder("Rozdział " + nrRozdzial + "\n");
+    }
 
-        for(int i = a; i < b ; i ++)
+    public String getArticles(int a, int b)
+    {
+
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = a - 1; i < b ; i ++)
         {
-            if(nrRozdzial != articles.get(i).getNrChapter())
-            {
-                nrRozdzial = articles.get(i).getNrChapter();
-                sb.append("Rozdział " + nrRozdzial + "\n");
-            }
             sb.append(articles.get(i).getTextArticle());
         }
         return sb.toString();
